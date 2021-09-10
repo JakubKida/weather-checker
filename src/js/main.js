@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import $ from 'jquery';
 
 const searchByTextButton = document.querySelector('#search-by-text');
