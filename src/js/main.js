@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import $ from 'jquery';
 
 const searchByTextButton = document.querySelector('#search-by-text');
@@ -6,6 +5,7 @@ const searchByLocationButton = document.querySelector('#search-by-location');
 const form = document.querySelector('form');
 const API_KEY = '98cac722e9046a291089fa55992bb90f';
 
+// based on weather pick the correct font from FontAwesome base
 const getIconClass = (weatherId) => {
   let code = String(weatherId).charAt(0);
 
@@ -66,9 +66,11 @@ const renderCard = ({
 
 const getWeatherDetails = async (e, name) => {
   try {
+    e.preventDefault();
+
     let response;
 
-    e.preventDefault();
+    // use the correct method to call the API depending on how the user interacted with page
     if (e.currentTarget === window) {
       response = await fetch(
         `http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=${API_KEY}&units=metric&&lang=pl`,
@@ -97,6 +99,7 @@ const getWeatherDetails = async (e, name) => {
       const processedResponse = await response.json();
       const relevantData = {};
 
+      // Extract only the necessary data
       relevantData.name = processedResponse.name;
       relevantData.longitude = processedResponse.coord.lon;
       relevantData.latitude = processedResponse.coord.lat;
@@ -114,6 +117,7 @@ const getWeatherDetails = async (e, name) => {
   }
 };
 
+// Store previously requested city/cities in localStorage on page close
 window.onbeforeunload = () => {
   const cityNameElements = document.querySelectorAll('.name');
   const cityNames = [];
@@ -124,6 +128,7 @@ window.onbeforeunload = () => {
   localStorage.setItem('names', JSON.stringify(cityNames));
 };
 
+// Load the city/citied on page load
 window.onload = (e) => {
   const names = JSON.parse(localStorage.getItem('names'));
   if (names !== null) {
