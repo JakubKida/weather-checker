@@ -74,14 +74,14 @@ const getWeatherDetails = async (e, name) => {
     // use the correct method to call the API depending on how the user interacted with page
     if (e.currentTarget === window) {
       response = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=${API_KEY}&units=metric&&lang=pl`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${name}&APPID=${API_KEY}&units=metric&&lang=pl`,
         { mode: 'cors' }
       );
     } else if (e.currentTarget.id === 'search-by-text') {
       const city = document.querySelector('#search-input').value;
 
       response = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${API_KEY}&units=metric&&lang=pl`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${API_KEY}&units=metric&&lang=pl`,
         { mode: 'cors' }
       );
     } else if (e.currentTarget.id === 'search-by-location') {
