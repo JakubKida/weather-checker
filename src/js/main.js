@@ -4,7 +4,7 @@ import $ from 'jquery';
 const searchByTextButton = document.querySelector('#search-by-text');
 const searchByLocationButton = document.querySelector('#search-by-location');
 const form = document.querySelector('form');
-const API_KEY = '';
+const API_KEY = '98cac722e9046a291089fa55992bb90f';
 
 const getIconClass = (weatherId) => {
   let code = String(weatherId).charAt(0);
@@ -110,7 +110,7 @@ const getWeatherDetails = async (e, name) => {
       throw new Error("Couldn't find the requested city.");
     }
   } catch (err) {
-    window.alert(err);
+    window.alert(err.message);
   }
 };
 
